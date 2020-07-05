@@ -10,7 +10,7 @@ ssp("gunnerus-trajectory") {
 
             elements {
 
-                component("VesselFmu", "resources/VesselFmu") {
+                component("vesselModel", "resources/VesselFmu") {
                     connectors {
                         real("additionalBodyForce[0].force.heave", input)
                         real("additionalBodyForce[0].force.surge", input)
@@ -168,8 +168,8 @@ ssp("gunnerus-trajectory") {
                         real("targetWP.north", output)
                         real("targetWP.east", output)
                         real("targetWP.speed", output)
-                        real("prevWP.speed", output)
-                        real("prevWP.speed", output)
+                        real("prevWP.north", output)
+                        real("prevWP.east", output)
                         real("prevWP.speed", output)
                     }
                     parameterBindings {
@@ -219,7 +219,7 @@ ssp("gunnerus-trajectory") {
                 "azimuth0.input_cg_x_rel_ap" to "vesselModel.cg_x_rel_ap"
                 "azimuth0.input_cg_y_rel_cl" to "vesselModel.cg_y_rel_cl"
                 "azimuth0.input_cg_z_rel_bl" to "vesselModel.cg_z_rel_bl"
-                "azimuth0.input_cg_surge_vel" to "vesselModel.cgShipMotion.linearVelocity.surg"
+                "azimuth0.input_cg_surge_vel" to "vesselModel.cgShipMotion.linearVelocity.surge"
                 "azimuth0.input_cg_sway_vel" to "vesselModel.cgShipMotion.linearVelocity.sway"
                 "azimuth0.input_yaw_vel" to "vesselModel.cgShipMotion.angularVelocity.yaw"
                 
@@ -228,7 +228,7 @@ ssp("gunnerus-trajectory") {
                 "azimuth1.input_cg_x_rel_ap" to "vesselModel.cg_x_rel_ap"
                 "azimuth1.input_cg_y_rel_cl" to "vesselModel.cg_y_rel_cl"
                 "azimuth1.input_cg_z_rel_bl" to "vesselModel.cg_z_rel_bl"
-                "azimuth1.input_cg_surge_vel" to "vesselModel.cgShipMotion.linearVelocity.surg"
+                "azimuth1.input_cg_surge_vel" to "vesselModel.cgShipMotion.linearVelocity.surge"
                 "azimuth1.input_cg_sway_vel" to "vesselModel.cgShipMotion.linearVelocity.sway"
                 "azimuth1.input_yaw_vel" to "vesselModel.cgShipMotion.angularVelocity.yaw"
                
@@ -240,11 +240,11 @@ ssp("gunnerus-trajectory") {
                 "vesselModel.additionalBodyForce[0].pointOfAttackRel2APAndBL.zpos" to "azimuth0.output_z_rel_bl"
                 
                 "vesselModel.additionalBodyForce[1].force.heave" to "azimuth1.output_force_heave"
-                "vesselModel.additionalBodyForce[2].force.surge" to "azimuth1.output_force_surge"
-                "vesselModel.additionalBodyForce[3].force.sway" to "azimuth1.output_force_sway"
-                "vesselModel.additionalBodyForce[4].pointOfAttackRel2APAndBL.xpos" to "azimuth1.output_x_rel_ap"
-                "vesselModel.additionalBodyForce[5].pointOfAttackRel2APAndBL.ypos" to "azimuth1.output_y_rel_cl"
-                "vesselModel.additionalBodyForce[6].pointOfAttackRel2APAndBL.zpos" to "azimuth1.output_z_rel_bl"
+                "vesselModel.additionalBodyForce[1].force.surge" to "azimuth1.output_force_surge"
+                "vesselModel.additionalBodyForce[1].force.sway" to "azimuth1.output_force_sway"
+                "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.xpos" to "azimuth1.output_x_rel_ap"
+                "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.ypos" to "azimuth1.output_y_rel_cl"
+                "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.zpos" to "azimuth1.output_z_rel_bl"
             }
 
         }
