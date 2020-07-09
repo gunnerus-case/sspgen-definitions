@@ -308,11 +308,15 @@ ssp("gunnerus-palfinger") {
                 
                 component("powerPlant", "resources/PowerPlant.fmu") {
                     connectors {
+                        real("p.f[1]", input)
+                        real("p.f[2]", input)
                         real("p1.f[1]", input)
                         real("p1.f[2]", input)
                         real("p2.f[1]", input)
                         real("p2.f[2]", input)
-                        
+                       
+                        real("p.e[1]", output)
+                        real("p.e[2]", output)
                         real("p1.e[1]", output)
                         real("p1.e[2]", output)
                         real("p2.e[1]", output)
