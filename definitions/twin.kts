@@ -16,7 +16,7 @@ ssp("gunnerus-twin") {
                        real("starboardAzimuth.angle", output)
                        
                        real("wind.direction", output)
-                       real("wind.speed"", output)
+                       real("wind.speed", output)
                        
                        real("rotation.yaw", output)
                        real("current", output)
@@ -168,8 +168,8 @@ ssp("gunnerus-twin") {
                 "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.ypos" to "azimuth1.output_y_rel_cl"
                 "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.zpos" to "azimuth1.output_z_rel_bl"
                 
-                "vesselModel.input_global_wind_dir" to gunnerus.wind.direction"
-                "vesselModel.input_global_wind_vel" to gunnerus.wind.speed"
+                "vesselModel.input_global_wind_dir" to "gunnerus.wind.direction"
+                "vesselModel.input_global_wind_vel" to "gunnerus.wind.speed"
             }
 
         }
