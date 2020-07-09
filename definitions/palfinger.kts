@@ -223,7 +223,7 @@ ssp("gunnerus-palfinger") {
                     }
                 }
                 
-                component("tunnel", "resources/TunnelThruster.fmu") {
+                component("tunnelThruster", "resources/TunnelThruster.fmu") {
                     connectors {
                         real("input_act_revs", input)
                         real("input_cg_x_rel_ap", input)
@@ -509,7 +509,7 @@ ssp("gunnerus-palfinger") {
                 
                 "tunnelThruster_rpmActuator.d_in.e" to "powerPlant.p.e[1]"
                 "tunnelThruster_rpmActuator.q_in.e" to "powerPlant.p.e[2]"
-                "tunnelThruster_rpmActuator.ThrustCom" to "tunnel.force"
+                "tunnelThruster_rpmActuator.ThrustCom" to "allocator.tunnel.force"
                 "tunnelThruster_rpmActuator.Shaft.e" to "tunnelThruster.output_torque"
                 
                 ("azimuth0.input_act_revs" to "azimuth0_rpmActuator.Shaft.f").linearTransformation(factor=60.0/(2*PI))
