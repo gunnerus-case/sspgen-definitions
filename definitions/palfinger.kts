@@ -386,7 +386,7 @@ ssp("gunnerus-palfinger") {
 
                         real("alloc.force.north", output)
                         real("alloc.force.east", output)
-                        real("alloc.force.yaw", output)
+                        real("alloc.torque.yaw", output)
 
                         real("azimuth0.angle", output)
                         real("azimuth1.angle", output)
@@ -440,7 +440,7 @@ ssp("gunnerus-palfinger") {
                         real("sensor.headingAngle", input)
                         real("force.surge", input)
                         real("force.sway", input)
-                        real("force.yaw", input)
+                        real("torque.yaw", input)
 
                         real("est.north", output)
                         real("est.east", output)
@@ -468,7 +468,7 @@ ssp("gunnerus-palfinger") {
                 "observer.sensor.headingAngle" to "vesselModel.cgShipMotion.angularDisplacement.yaw"
                 "observer.force.surge" to "allocator.alloc.force.north"
                 "observer.force.sway" to "allocator.alloc.force.east"
-                "observer.force.yaw" to "allocator.alloc.force.yaw"
+                "observer.torque.yaw" to "allocator.alloc.torque.yaw"
                 
                 "dpController.ref.north" to "waypointProvider.targetWP.north"
                 "dpController.ref.east" to "waypointProvider.targetWP.east"
