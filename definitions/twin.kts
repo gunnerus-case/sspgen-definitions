@@ -113,7 +113,7 @@ ssp("gunnerus-twin") {
                         copyFrom("portAzimuth")
                     }
                     parameterBindings {
-                        copyFrom("azimuth0", "initialValues") {
+                        copyFrom("portAzimuth", "initialValues") {
                             real("input_y_rel_cl", 2)
                         }
                     }
