@@ -119,19 +119,6 @@ ssp("gunnerus-twin") {
                     }
                 }
                 
-                component("azimuth0_rpmActuator", "fmu-proxy://localhost:9090?file=resources/ThrusterDrive.fmu") {
-                    connectors {
-                        real("d_in.e", input)
-                        real("q_in.e", input)
-                        real("ThrustCom", input)
-                        real("Shaft.e", input)
-                        
-                        real("d_in.f", output)
-                        real("q_in.f", output)
-                        real("Shaft.f", output)
-                    }
-                }
-                
             }
 
             connections(inputsFirst=true) {
@@ -154,19 +141,19 @@ ssp("gunnerus-twin") {
                 "starboardAzimuth.input_cg_sway_vel" to "vesselModel.cgShipMotion.linearVelocity.sway"
                 "starboardAzimuth.input_yaw_vel" to "vesselModel.cgShipMotion.angularVelocity.yaw"
                
-                "vesselModel.additionalBodyForce[0].force.heave" to "azimuth0.output_force_heave"
-                "vesselModel.additionalBodyForce[0].force.surge" to "azimuth0.output_force_surge"
-                "vesselModel.additionalBodyForce[0].force.sway" to "azimuth0.output_force_sway"
-                "vesselModel.additionalBodyForce[0].pointOfAttackRel2APAndBL.xpos" to "azimuth0.output_x_rel_ap"
-                "vesselModel.additionalBodyForce[0].pointOfAttackRel2APAndBL.ypos" to "azimuth0.output_y_rel_cl"
-                "vesselModel.additionalBodyForce[0].pointOfAttackRel2APAndBL.zpos" to "azimuth0.output_z_rel_bl"
+                "vesselModel.additionalBodyForce[0].force.heave" to "portAzimuth.output_force_heave"
+                "vesselModel.additionalBodyForce[0].force.surge" to "portAzimuth.output_force_surge"
+                "vesselModel.additionalBodyForce[0].force.sway" to "portAzimuth.output_force_sway"
+                "vesselModel.additionalBodyForce[0].pointOfAttackRel2APAndBL.xpos" to "portAzimuth.output_x_rel_ap"
+                "vesselModel.additionalBodyForce[0].pointOfAttackRel2APAndBL.ypos" to "portAzimuth.output_y_rel_cl"
+                "vesselModel.additionalBodyForce[0].pointOfAttackRel2APAndBL.zpos" to "portAzimuth.output_z_rel_bl"
                 
-                "vesselModel.additionalBodyForce[1].force.heave" to "azimuth1.output_force_heave"
-                "vesselModel.additionalBodyForce[1].force.surge" to "azimuth1.output_force_surge"
-                "vesselModel.additionalBodyForce[1].force.sway" to "azimuth1.output_force_sway"
-                "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.xpos" to "azimuth1.output_x_rel_ap"
-                "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.ypos" to "azimuth1.output_y_rel_cl"
-                "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.zpos" to "azimuth1.output_z_rel_bl"
+                "vesselModel.additionalBodyForce[1].force.heave" to "starboardAzimuth.output_force_heave"
+                "vesselModel.additionalBodyForce[1].force.surge" to "starboardAzimuth.output_force_surge"
+                "vesselModel.additionalBodyForce[1].force.sway" to "starboardAzimuth.output_force_sway"
+                "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.xpos" to "starboardAzimuth.output_x_rel_ap"
+                "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.ypos" to "starboardAzimuth.output_y_rel_cl"
+                "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.zpos" to "starboardAzimuth.output_z_rel_bl"
                 
                 "vesselModel.input_global_wind_dir" to "gunnerus.wind.direction"
                 "vesselModel.input_global_wind_vel" to "gunnerus.wind.speed"
