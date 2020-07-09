@@ -142,9 +142,9 @@ ssp("gunnerus-palfinger") {
                         real("craneForce[2]", output)
                         real("craneForce[3]", output)
                         
-                        real("output_x_rel_ap", output)
-                        real("output_y_rel_cl", output)
-                        real("output_z_rel_bl", output)
+                        //real("output_x_rel_ap", output)
+                        //real("output_y_rel_cl", output)
+                        //real("output_z_rel_bl", output)
                     }
                     parameterBindings {
                         parameterSet("initialValues") {
