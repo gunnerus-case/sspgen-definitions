@@ -145,7 +145,7 @@ ssp("gunnerus-twin") {
                 "portAzimuth.input_cg_sway_vel" to "vesselModel.cgShipMotion.linearVelocity.sway"
                 "portAzimuth.input_yaw_vel" to "vesselModel.cgShipMotion.angularVelocity.yaw"
                 
-                ("starboardAzimuth.input_act_revs" to "gunnerus.portAzimuth.rpm").linearTransformation(factor=60.0/(2*PI))
+                ("starboardAzimuth.input_act_revs" to "gunnerus.portAzimuth.rpm").linearTransformation(factor=2.03)
                 "starboardAzimuth.input_act_angle" to "gunnerus.portAzimuth.angle"
                 "starboardAzimuth.input_cg_x_rel_ap" to "vesselModel.cg_x_rel_ap"
                 "starboardAzimuth.input_cg_y_rel_cl" to "vesselModel.cg_y_rel_cl"
