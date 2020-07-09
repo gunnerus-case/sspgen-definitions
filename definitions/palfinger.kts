@@ -585,6 +585,10 @@ ssp("gunnerus-palfinger") {
 
         }
     }
+    
+    namespaces {
+        namespace("osp", "http://opensimulationplatform.com/SSP/OSPAnnotations")
+    }
 
     resources {
         url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/VesselFmu.fmu")
