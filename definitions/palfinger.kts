@@ -395,7 +395,7 @@ ssp("gunnerus-palfinger") {
                         real("tunnel.force", output)
                     }
                     parameterBindings {
-                        parameterSet("initalValues") {
+                        parameterSet("initialValues") {
                             boolean("shouldLog", false)
                             boolean("enable", false)
                         }
