@@ -1,5 +1,7 @@
 #!sspgen
 
+import kotlin.math.PI
+
 ssp("gunnerus-palfinger") {
 
     ssd("KPN Twinship Gunnerus case") {
