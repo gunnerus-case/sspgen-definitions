@@ -94,7 +94,7 @@ ssp("gunnerus-trajectory") {
                     }
                 }
                 
-                component("azimuth0_rpmActuator", "fmu-proxy://localhost:9090?file=../../fmus/ThrusterDrive.fmu") {
+                component("azimuth0_rpmActuator", "fmu-proxy://localhost:9090?file=resources/ThrusterDrive.fmu") {
                     connectors {
                         real("d_in.e", input)
                         real("q_in.e", input)
@@ -107,7 +107,7 @@ ssp("gunnerus-trajectory") {
                     }
                 }
                 
-                component("azimuth1_rpmActuator", "fmu-proxy://localhost:9091?file=../../fmus/ThrusterDrive.fmu") {
+                component("azimuth1_rpmActuator", "fmu-proxy://localhost:9091?file=resources/ThrusterDrive.fmu") {
                     connectors {
                         copyFrom("azimuth0_rpmActuator")
                     }
@@ -253,6 +253,7 @@ ssp("gunnerus-trajectory") {
     resources {
         url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/VesselFmu.fmu")
         url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/PowerPlant.fmu")
+        url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/ThrusterDrive.fmu")
         url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/TrajectoryController.fmu")
         url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/WaypointProvider2DOF.fmu")
     }
