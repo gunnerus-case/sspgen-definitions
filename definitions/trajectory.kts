@@ -10,7 +10,7 @@ ssp("gunnerus-trajectory") {
 
             elements {
 
-                component("vesselModel", "resources/VesselFmu") {
+                component("vesselModel", "resources/VesselFmu.fmu") {
                     connectors {
                         real("additionalBodyForce[0].force.heave", input)
                         real("additionalBodyForce[0].force.surge", input)
@@ -159,7 +159,7 @@ ssp("gunnerus-trajectory") {
                     }
                 }
 
-                component("wpProvider", "resources/WaypointProvider2DOF") {
+                component("wpProvider", "resources/WaypointProvider2DOF.fmu") {
                     connectors {
                         real("northPosition", input)
                         real("eastPosition", input)
