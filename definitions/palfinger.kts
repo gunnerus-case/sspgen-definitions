@@ -421,7 +421,7 @@ ssp("gunnerus-palfinger") {
                             boolean("shouldLog", false)
                             real("input.targetWP.north", 0)
                             real("input.targetWP.east", 0)
-                            real("input.targetWP.yaww", 0)
+                            real("input.targetWP.yaw", 0)
                         }
                     }
                     annotations {
