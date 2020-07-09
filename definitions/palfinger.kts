@@ -68,7 +68,7 @@ ssp("gunnerus-palfinger") {
                         
                         real("cgShipMotion.linearVelocity.surge", output)
                         real("cgShipMotion.linearVelocity.sway", output)
-                        real("cgShipMotion.linearVelocity.yaw", output)
+                        real("cgShipMotion.angularVelocity.yaw", output)
                         
                         real("cgShipMotion.linearAcceleration.surge", output)
                         real("cgShipMotion.linearAcceleration.sway", output)
@@ -372,6 +372,39 @@ ssp("gunnerus-palfinger") {
                     }
                 }
                 
+                component("allocator", "resources/ControlAllocatorGIFixedAngles.fmu") {
+                    connectors {
+                        real("desiredGenForce.north", input)
+                        real("desiredGenForce.east", input)
+                        real("desiredGenForce.yaw", input)
+                        real("vessel.cg_x_rel_ap", input)
+                        real("vessel.cg_y_rel_cl", input)
+
+                        real("alloc.force.north", output)
+                        real("alloc.force.east", output)
+                        real("alloc.force.yaw", output)
+
+                        real("azimuth0.angle", output)
+                        real("azimuth1.angle", output)
+                        real("azimuth0.force", output)
+                        real("azimuth1.force", output)
+                        real("tunnel.force", output)
+                    }
+                    parameterBindings {
+                        parameterSet("initalValues") {
+                            boolean("shouldLog", false)
+                            boolean("enable", false)
+                        }
+                    }
+                    annotations {
+                        annotation("com.opensimulationplatform") {
+                            """
+                            <osp:StepSizeHint value="0.05"/>
+                        """
+                        }
+                    }
+                }
+                
                 component("waypointProvider", "resources/WaypointProvider3DOF.fmu") {
                     connectors {
                         real("targetWP.north", output)
@@ -431,7 +464,7 @@ ssp("gunnerus-palfinger") {
                 "observer.sensor.headingAngle" to "vesselModel.cgShipMotion.angularDisplacement.yaw"
                 "observer.force.surge" to "allocator.alloc.force.north"
                 "observer.force.sway" to "allocator.alloc.force.east"
-                "observer.force.yaww" to "allocator.alloc.force.yaw"
+                "observer.force.yaw" to "allocator.alloc.force.yaw"
                 
                 "dpController.ref.north" to "waypointProvider.targetWP.north"
                 "dpController.ref.east" to "waypointProvider.targetWP.east"
@@ -451,7 +484,7 @@ ssp("gunnerus-palfinger") {
                 "dpController.sensor.yawVelocity" to "vesselModel.cgShipMotion.angularVelocity.yaw"
                 "dpController.sensor.surgeAcceleration" to "vesselModel.cgShipMotion.linearAcceleration.surge"
                 "dpController.sensor.swayAcceleration" to "vesselModel.cgShipMotion.linearAcceleration.sway"
-                "dpController.sensor.yawAcceleration" to "vesselModel.cgShipMotion.linearAcceleration.yaw"
+                "dpController.sensor.yawAcceleration" to "vesselModel.cgShipMotion.angularAcceleration.yaw"
                 
                 "powerPlant.p1.f[1]" to "azimuth0_rpmActuator.d_in.f"
                 "powerPlant.p1.f[2]" to "azimuth0_rpmActuator.q_in.f"
@@ -557,6 +590,7 @@ ssp("gunnerus-palfinger") {
         url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/DPController.fmu")
         url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/NonlinearPassiveObserver.fmu")
         url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/WaypointProvider3DOF.fmu")
+        url("https://github.com/gunnerus-case/gunnerus-fmus-bin/raw/master/ControlAllocatorGIFixedAngles.fmu")
     }
 
 }
