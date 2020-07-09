@@ -223,7 +223,7 @@ ssp("gunnerus-palfinger") {
                     }
                 }
                 
-                component("thunnelThruster", "resources/TunnelThruster.fmu") {
+                component("tunnel", "resources/TunnelThruster.fmu") {
                     connectors {
                         real("input_act_revs", input)
                         real("input_cg_x_rel_ap", input)
