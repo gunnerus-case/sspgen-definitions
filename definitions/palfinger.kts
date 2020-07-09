@@ -1,7 +1,4 @@
-  
 #!sspgen
-
-import kotlin.math.PI
 
 ssp("gunnerus-palfinger") {
 
@@ -398,16 +395,30 @@ ssp("gunnerus-palfinger") {
                 }
                 
                 component("observer", "resources/NonlinearPassiveObserver.fmu") {
-                    real("sensor.northPosition", input)
-                    real("sensor.eastPosition", input)
-                    real("sensor.headingAngle", input)
-                    real("force.surge", input)
-                    real("force.sway", input)
-                    real("force.yaw", input)
-                    
-                    real("est.north", output)
-                    real("est.east", output)
-                    real("est.yaw", output)
+                    connectors {
+                        real("sensor.northPosition", input)
+                        real("sensor.eastPosition", input)
+                        real("sensor.headingAngle", input)
+                        real("force.surge", input)
+                        real("force.sway", input)
+                        real("force.yaw", input)
+
+                        real("est.north", output)
+                        real("est.east", output)
+                        real("est.yaw", output) 
+                    }
+                    parameterBindings {
+                        parameterSet("initialValues") {
+                            boolean("shouldLog", false)
+                        }
+                    }
+                    annotations {
+                        annotation("com.opensimulationplatform") {
+                        """
+                            <osp:StepSizeHint value="0.05"/>
+                        """
+                        }
+                    }
                 }
 
             }
@@ -419,7 +430,24 @@ ssp("gunnerus-palfinger") {
                 "observer.force.surge" to "allocator.alloc.force.north"
                 "observer.force.sway" to "allocator.alloc.force.east"
                 "observer.force.yaww" to "allocator.alloc.force.yaw"
+                
+                "dpController.ref.north" to "waypointProvider.targetWP.north"
+                "dpController.ref.east" to "waypointProvider.targetWP.east"
+                "dpController.ref.psi" to "waypointProvider.targetWP.yaw"
 
+                "allocator.desiredGenForce.north" to "dpController.cmd.force.x"
+                "allocator.desiredGenForce.east" to "dpController.cmd.force.y"
+                "allocator.desiredGenForce.yaw" to "dpController.cmd.force.psi"
+                "allocator.vessel.cg_x_rel_ap" to "vesselModel.cg_x_rel_ap"
+                "allocator.vessel.cg_y_rel_cl" to "vesselModel.cg_y_rel_cl"
+                
+                "dpController.sensor.northPosition" to "observer.est.north"
+                "dpController.sensor.eastPosition" to "observer.est.east"
+                "dpController.sensor.headingAngle" to "observer.est.yaw"
+                "dpController.sensor.surgeVelocity" to "vesselModel.cgShipMotion.linearVelocity.surge"
+                "dpController.sensor.swayVelocity" to "vesselModel.cgShipMotion.linearVelocity.sway"
+                "dpController.sensor.yawVelocity" to "vesselModel.cgShipMotion.angularVelocity.yaw"
+                
                 "powerPlant.p1.f[1]" to "azimuth0_rpmActuator.d_in.f"
                 "powerPlant.p1.f[2]" to "azimuth0_rpmActuator.q_in.f"
                 "powerPlant.p2.f[1]" to "azimuth1_rpmActuator.d_in.f"
@@ -436,6 +464,11 @@ ssp("gunnerus-palfinger") {
                 "azimuth1_rpmActuator.q_in.e" to "powerPlant.p2.e[2]"
                 "azimuth1_rpmActuator.ThrustCom" to "trackController.forceCommand"
                 "azimuth1_rpmActuator.Shaft.e" to "azimuth1.output_torque"
+                
+                "tunnelThruster_rpmActuator.d_in.e" to "powerPlant.p.e[1]"
+                "tunnelThruster_rpmActuator.q_in.e" to "powerPlant.p.e[2]"
+                "tunnelThruster_rpmActuator.ThrustCom" to "tunnel.force"
+                "tunnelThruster_rpmActuator.Shaft.e" to "tunnelThruster.output_torque"
                 
                 ("azimuth0.input_act_revs" to "azimuth0_rpmActuator.Shaft.f").linearTransformation(factor=60.0/(2*PI))
                 "azimuth0.input_act_angle" to "trackController.rudderCommand"
@@ -454,6 +487,14 @@ ssp("gunnerus-palfinger") {
                 "azimuth1.input_cg_surge_vel" to "vesselModel.cgShipMotion.linearVelocity.surge"
                 "azimuth1.input_cg_sway_vel" to "vesselModel.cgShipMotion.linearVelocity.sway"
                 "azimuth1.input_yaw_vel" to "vesselModel.cgShipMotion.angularVelocity.yaw"
+                
+                ("tunnelThruster.input_act_revs" to "azimuth1_rpmActuator.Shaft.f").linearTransformation(factor=60.0/(2*PI))
+                "tunnelThruster.input_cg_x_rel_ap" to "vesselModel.cg_x_rel_ap"
+                "tunnelThruster.input_cg_y_rel_cl" to "vesselModel.cg_y_rel_cl"
+                "tunnelThruster.input_cg_z_rel_bl" to "vesselModel.cg_z_rel_bl"
+                "tunnelThruster.input_cg_surge_vel" to "vesselModel.cgShipMotion.linearVelocity.surge"
+                "tunnelThruster.input_cg_sway_vel" to "vesselModel.cgShipMotion.linearVelocity.sway"
+                "tunnelThruster.input_yaw_vel" to "vesselModel.cgShipMotion.angularVelocity.yaw"
                
                 "vesselModel.additionalBodyForce[0].force.heave" to "azimuth0.output_force_heave"
                 "vesselModel.additionalBodyForce[0].force.surge" to "azimuth0.output_force_surge"
@@ -468,6 +509,13 @@ ssp("gunnerus-palfinger") {
                 "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.xpos" to "azimuth1.output_x_rel_ap"
                 "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.ypos" to "azimuth1.output_y_rel_cl"
                 "vesselModel.additionalBodyForce[1].pointOfAttackRel2APAndBL.zpos" to "azimuth1.output_z_rel_bl"
+                
+                "vesselModel.additionalBodyForce[2].force.heave" to "tunnelThruster.output_force_heave"
+                "vesselModel.additionalBodyForce[2].force.surge" to "tunnelThruster.output_force_surge"
+                "vesselModel.additionalBodyForce[2].force.sway" to "tunnelThruster.output_force_sway"
+                "vesselModel.additionalBodyForce[2].pointOfAttackRel2APAndBL.xpos" to "tunnelThruster.output_x_rel_ap"
+                "vesselModel.additionalBodyForce[2].pointOfAttackRel2APAndBL.ypos" to "tunnelThruster.output_y_rel_cl"
+                "vesselModel.additionalBodyForce[2].pointOfAttackRel2APAndBL.zpos" to "tunnelThruster.output_z_rel_bl"
             }
 
         }
