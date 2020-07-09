@@ -530,7 +530,7 @@ ssp("gunnerus-palfinger") {
                 "azimuth1.input_cg_sway_vel" to "vesselModel.cgShipMotion.linearVelocity.sway"
                 "azimuth1.input_yaw_vel" to "vesselModel.cgShipMotion.angularVelocity.yaw"
                 
-                ("tunnelThruster.input_act_revs" to "azimuth1_rpmActuator.Shaft.f").linearTransformation(factor=60.0/(2*PI))
+                ("tunnelThruster.input_act_revs" to "tunnelThruster_rpmActuator.Shaft.f").linearTransformation(factor=60.0/(2*PI))
                 "tunnelThruster.input_cg_x_rel_ap" to "vesselModel.cg_x_rel_ap"
                 "tunnelThruster.input_cg_y_rel_cl" to "vesselModel.cg_y_rel_cl"
                 "tunnelThruster.input_cg_z_rel_bl" to "vesselModel.cg_z_rel_bl"
@@ -575,6 +575,7 @@ ssp("gunnerus-palfinger") {
                 "vesselModel.additionalNedForce[0].pointOfAttackRel2APAndBL.xpos" to "crane.cranePosition[1]"
                 "vesselModel.additionalNedForce[0].pointOfAttackRel2APAndBL.ypos" to "crane.cranePosition[2]"
                 "vesselModel.additionalNedForce[0].pointOfAttackRel2APAndBL.zpos" to "crane.cranePosition[3]"
+                "vesselModel.additionalNedForce[1].force.north" to "crane.loadForce[1]"
                 "vesselModel.additionalNedForce[1].force.east" to "crane.loadForce[2]"
                 "vesselModel.additionalNedForce[1].force.down" to "crane.loadForce[3]"
                 "vesselModel.additionalNedForce[1].pointOfAttackRel2APAndBL.xpos" to "crane.tipPositionShipFrame[1]"
