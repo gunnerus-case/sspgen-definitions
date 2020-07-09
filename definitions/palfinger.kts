@@ -295,7 +295,7 @@ ssp("gunnerus-palfinger") {
                           
                 component("tunnelThruster_rpmActuator", "fmu-proxy://localhost:9092?file=resources/ThrusterDrive.fmu") {
                     connectors {
-                        copyFrom("azimuth0")
+                        copyFrom("azimuth0_rpmActuator")
                     }
                     annotations {
                         annotation("com.opensimulationplatform") {
@@ -499,12 +499,12 @@ ssp("gunnerus-palfinger") {
                 
                 "azimuth0_rpmActuator.d_in.e" to "powerPlant.p1.e[1]"
                 "azimuth0_rpmActuator.q_in.e" to "powerPlant.p1.e[2]"
-                "azimuth0_rpmActuator.ThrustCom" to "trackController.forceCommand"
+                "azimuth0_rpmActuator.ThrustCom" to "allocator.azimuth0.force"
                 "azimuth0_rpmActuator.Shaft.e" to "azimuth0.output_torque"
                 
                 "azimuth1_rpmActuator.d_in.e" to "powerPlant.p2.e[1]"
                 "azimuth1_rpmActuator.q_in.e" to "powerPlant.p2.e[2]"
-                "azimuth1_rpmActuator.ThrustCom" to "trackController.forceCommand"
+                "azimuth1_rpmActuator.ThrustCom" to "allocator.azimuth1.force"
                 "azimuth1_rpmActuator.Shaft.e" to "azimuth1.output_torque"
                 
                 "tunnelThruster_rpmActuator.d_in.e" to "powerPlant.p.e[1]"
@@ -513,7 +513,7 @@ ssp("gunnerus-palfinger") {
                 "tunnelThruster_rpmActuator.Shaft.e" to "tunnelThruster.output_torque"
                 
                 ("azimuth0.input_act_revs" to "azimuth0_rpmActuator.Shaft.f").linearTransformation(factor=60.0/(2*PI))
-                "azimuth0.input_act_angle" to "trackController.rudderCommand"
+                "azimuth0.input_act_angle" to "allocator.azimuth0.angle"
                 "azimuth0.input_cg_x_rel_ap" to "vesselModel.cg_x_rel_ap"
                 "azimuth0.input_cg_y_rel_cl" to "vesselModel.cg_y_rel_cl"
                 "azimuth0.input_cg_z_rel_bl" to "vesselModel.cg_z_rel_bl"
@@ -522,7 +522,7 @@ ssp("gunnerus-palfinger") {
                 "azimuth0.input_yaw_vel" to "vesselModel.cgShipMotion.angularVelocity.yaw"
                 
                 ("azimuth1.input_act_revs" to "azimuth1_rpmActuator.Shaft.f").linearTransformation(factor=60.0/(2*PI))
-                "azimuth1.input_act_angle" to "trackController.rudderCommand"
+                "azimuth1.input_act_angle" to "allocator.azimuth1.angle"
                 "azimuth1.input_cg_x_rel_ap" to "vesselModel.cg_x_rel_ap"
                 "azimuth1.input_cg_y_rel_cl" to "vesselModel.cg_y_rel_cl"
                 "azimuth1.input_cg_z_rel_bl" to "vesselModel.cg_z_rel_bl"
