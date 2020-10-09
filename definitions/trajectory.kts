@@ -33,7 +33,6 @@ ssp("gunnerus-trajectory") {
                         real("cgShipMotion.ned.east", output)
                         real("cgShipMotion.linearVelocity.surge", output)
                         real("cgShipMotion.linearVelocity.sway", output)
-                        real("cgShipMotion.linearVelocity.yaw", output)
                         real("cgShipMotion.angularVelocity.yaw", output)
                         real("cgShipMotion.angularDisplacement.yaw", output)
                     }
